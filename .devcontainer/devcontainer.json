@@ -1,0 +1,40 @@
+{
+  "name": "Archestra Platform",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": "true",
+      "moby": "true"
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "kubectl": "true",
+      "helm": "true",
+      "minikube": "false"
+    },
+    "ghcr.io/devcontainers/features/starship:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+      ]
+    }
+  },
+  "forwardPorts": [3000, 9000, 9050],
+  "portsAttributes": {
+    "3000": {
+      "label": "Frontend",
+      "onAutoForward": "notify"
+    },
+    "9000": {
+      "label": "Backend API",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "npm install -g pnpm && pnpm install"
+}
